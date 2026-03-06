@@ -12,29 +12,23 @@ env:
   APP_NAME: cron-ticker-v2
 
 jobs:
-build:
-runs-on: ubuntu-latest
-env:
-BUILD_DIR: dist
-steps:
-- uses: actions/checkout@v4
+  build:
+    runs-on: ubuntu-latest
+    env:
+      BUILD_DIR: dist
 
-- name: Show local variables
-  run: |
-      echo "App: ${{env.APP_NAME}}, Node: ${{env.NODE_VERSION}}"
+    steps:
+      - uses: actions/checkout@v4
 
-- name: Show Github variables
-  run: |
-      echo "App: ${{vars.APP_VERSION}}"
+      - name: Show local variables
+        run: |
+          echo "App: ${{ env.APP_NAME }}, Node: ${{ env.NODE_VERSION }}"
 
+      - name: Show Github variables
+        run: |
+          echo "App: ${{ vars.APP_VERSION }}"
 
--name: build
-run: npm run build
-env:
-APP_VERSION: ${{vars.APP_VERSION}}
-
-
-
-
-
-
+      - name: build
+        run: npm run build
+        env:
+          APP_VERSION: ${{ vars.APP_VERSION }}
